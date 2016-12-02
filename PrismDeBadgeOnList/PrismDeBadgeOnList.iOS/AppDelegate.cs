@@ -6,6 +6,7 @@ using Foundation;
 using UIKit;
 using Prism.Unity;
 using Microsoft.Practices.Unity;
+using RoundedBoxView.Forms.Plugin.iOSUnified;
 
 namespace PrismDeBadgeOnList.iOS
 {
@@ -25,6 +26,9 @@ namespace PrismDeBadgeOnList.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            RoundedBoxViewRenderer.Init();
+
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

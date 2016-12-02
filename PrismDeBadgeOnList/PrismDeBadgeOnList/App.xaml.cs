@@ -1,5 +1,6 @@
 ﻿using Prism.Unity;
 using PrismDeBadgeOnList.Views;
+using Xamarin.Forms;
 
 namespace PrismDeBadgeOnList
 {
@@ -11,11 +12,12 @@ namespace PrismDeBadgeOnList
         {
             InitializeComponent();
 
-            NavigationService.NavigateAsync("MainPage?title=Hello%20from%20Xamarin.Forms");
+            NavigationService.NavigateAsync("/NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes()
         {
+            Container.RegisterTypeForNavigation<NavigationPage>();
             Container.RegisterTypeForNavigation<MainPage>();
         }
     }

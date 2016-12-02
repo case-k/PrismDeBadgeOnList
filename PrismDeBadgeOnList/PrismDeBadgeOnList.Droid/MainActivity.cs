@@ -22,6 +22,9 @@ namespace PrismDeBadgeOnList.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            RoundedBoxView.Forms.Plugin.Droid.RoundedBoxViewRenderer.Init();
+
             LoadApplication(new App(new AndroidInitializer()));
         }
     }

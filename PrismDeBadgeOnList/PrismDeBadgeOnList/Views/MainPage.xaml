@@ -2,10 +2,56 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:abstractions="clr-namespace:RoundedBoxView.Forms.Plugin.Abstractions;assembly=RoundedBoxView.Forms.Plugin.Abstractions"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="PrismDeBadgeOnList.Views.MainPage"
              Title="MainPage">
-  <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-    <Label Text="{Binding Title}" />
-  </StackLayout>
+
+  <ListView ItemsSource="{Binding Users}" VerticalOptions="FillAndExpand">
+
+    <ListView.ItemTemplate>
+      <DataTemplate>
+
+        <!--RoundedBoxViewとLabelでBadgeっぽくしてみる-->
+        <ViewCell>
+
+            <Grid Padding="15,0,5,0">
+              
+              <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+
+
+              <Label Grid.Row="0" Grid.Column="0" Text="{Binding Name}" YAlign="Center"/>
+
+              <abstractions:RoundedBoxView Grid.Row="0" Grid.Column="1" BackgroundColor="Gray" HeightRequest="30" WidthRequest="45" CornerRadius="15"
+                                           HorizontalOptions="Center" VerticalOptions="Center">
+                <abstractions:RoundedBoxView.Triggers>
+                  <DataTrigger TargetType="abstractions:RoundedBoxView" Binding="{Binding Path=Count}" Value="0">
+                    <Setter Property="IsVisible" Value="False" />
+                  </DataTrigger >
+                </abstractions:RoundedBoxView.Triggers>
+              </abstractions:RoundedBoxView>
+              <Label Grid.Row="0" Grid.Column="1" Text="{Binding Count}" XAlign="Center" YAlign="Center" TextColor="White">
+                <Label.Triggers>
+                  <DataTrigger TargetType="Label" Binding="{Binding Path=Count}" Value="0">
+                    <Setter Property="IsVisible" Value="False" />
+                  </DataTrigger >
+                </Label.Triggers>
+              </Label>
+
+            </Grid>
+          
+          </ViewCell>
+
+      </DataTemplate>
+    </ListView.ItemTemplate>
+
+  </ListView>
+
 </ContentPage>
